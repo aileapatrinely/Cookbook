@@ -2,9 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
+
 router.get('/', (req, res) => {
     const queryText = `SELECT * FROM "recipe" WHERE "recipe".user_id = $1;`;
     pool
@@ -13,9 +11,7 @@ router.get('/', (req, res) => {
         .catch((error) => console.log('Error in recipe GET route', error));
 });
 
-/**
- * POST route template
- */
+
 router.post('/', (req, res) => {
     const recipe_name = req.body.recipe_name;
     const user_id = req.body.user_id;
@@ -28,6 +24,17 @@ router.post('/', (req, res) => {
     ])
     .then(() => res.sendStatus(201))
     .catch(() => res.sendStatus(500));
+});
+
+router.put('/:id',(req, res) => {
+    const recipe_name = req.body.recipe_name;
+    const user_id = req.body.user_id;
+    
+    const queryText = `UPDATE "recipe" SET "recipe_name"=$1 WHERE "user_id"=$2;`;
+    pool
+        .query(queryText, [recipe_name])
+        .then(() => res.sendStatus(201))
+        .catch(() => res.sendStatus(500));
 });
 
 module.exports = router;
