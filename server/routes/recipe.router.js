@@ -17,7 +17,17 @@ router.get('/', (req, res) => {
  * POST route template
  */
 router.post('/', (req, res) => {
+    const recipe_name = req.body.recipe_name;
+    const user_id = req.body.user_id;
 
+    const queryText = `INSERT INTO "recipe" (recipe_name, user_id) VALUES ($1, $2);`;
+    pool
+        .query(queryText, [
+            recipe_name,
+            user_id,
+    ])
+    .then(() => res.sendStatus(201))
+    .catch(() => res.sendStatus(500));
 });
 
 module.exports = router;
