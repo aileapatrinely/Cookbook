@@ -37,4 +37,17 @@ router.put('/:id',(req, res) => {
         .catch(() => res.sendStatus(500));
 });
 
+router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+    
+    const queryText = `DELETE FROM "recipe" WHERE "recipe".id=$1;`;
+    pool
+        .query(queryText, [id])
+        .then(() => res.sendStatus(200))
+        .catch((err) => {
+            console.log(err);
+            res.sendStatus(500);
+        });
+});
+
 module.exports = router;
