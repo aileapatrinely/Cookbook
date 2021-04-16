@@ -30,4 +30,31 @@ router.post('/', (req, res) => {
         .catch(() => res.sendStatus(500));
 });
 
+router.put('/:id', (req,res) => {
+    const instructions = req.body.instructions;
+    const id = req.params.id;
+
+    const queryText = `UPDATE "intructions" SET "instructions"=$1 WHERE "id"=$2;`;
+    pool
+        .query(queryText, [
+            instructions,
+            id,
+        ])
+        .then(() => res.sendStatus(201))
+        .catch(() => res.sendStatus(500));
+});
+
+router.delete('/:id', (req,res) =>{
+    const id = req.params.id;
+    
+    const queryText = `DELETE FROM "instructions" WHERE "instructions".id=$1;`;
+    pool
+        .query(queryText, [id])
+        .then(() => res.sendStatus(200))
+        .catch((err) => {
+            console.log(err);
+            res.sendStatus(500);
+        });
+});
+
 module.exports = router;
