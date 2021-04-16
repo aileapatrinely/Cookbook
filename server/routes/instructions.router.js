@@ -17,7 +17,17 @@ router.get('/', (req, res) => {
 
 
 router.post('/', (req, res) => {
+    const instructions = req.body.instructions;
+    const recipe_id = req.body.recipe_id;
 
+    const queryText = `INSERT INTO "instructions" (instructions, recipe_id) VALUES ($1, $2);`;
+    pool
+        .query(queryText, [
+            instructions,
+            recipe_id,
+        ])
+        .then(() => res.sendStatus(201))
+        .catch(() => res.sendStatus(500));
 });
 
 module.exports = router;
