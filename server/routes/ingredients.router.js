@@ -36,4 +36,24 @@ router.post('/', (req, res) => {
         .catch(() => res.sendStatus(500));
 });
 
+router.put('/:id', (req,res) => {
+    const ingredient_name = req.body.ingredient_name;
+    const amount = req.body.amount;
+    const id = req.params.id;
+
+    const queryText = `UPDATE "ingredients" SET "ingredient_name"=$1, "amount"=$2 WHERE "id"=$3;`;
+    pool
+        .query(queryText, [
+            ingredient_name,
+            amount,
+            id,
+        ])
+        .then(() => res.sendStatus(201))
+        .catch(() => res.sendStatus(500));
+});
+
+router.delete('/:id', (req,res) =>{
+
+});
+
 module.exports = router;

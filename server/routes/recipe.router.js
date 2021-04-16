@@ -28,11 +28,11 @@ router.post('/', (req, res) => {
 
 router.put('/:id',(req, res) => {
     const recipe_name = req.body.recipe_name;
-    const user_id = req.body.user_id;
+    const id = req.params.id;
     
-    const queryText = `UPDATE "recipe" SET "recipe_name"=$1 WHERE "user_id"=$2;`;
+    const queryText = `UPDATE "recipe" SET "recipe_name"=$1 WHERE "id"=$2;`;
     pool
-        .query(queryText, [recipe_name])
+        .query(queryText, [recipe_name, id])
         .then(() => res.sendStatus(201))
         .catch(() => res.sendStatus(500));
 });
