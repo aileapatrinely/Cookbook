@@ -9,7 +9,7 @@ const AboutPage = () => (
   <div>
     <div>
       <p>
-        This about page is for anyone to read!
+        Welcome to your Cookbook, a recipe orginization app. You can add, edit, and delete your recipes and then have them all located in one convenient place.
       </p>
     </div>
   </div>
