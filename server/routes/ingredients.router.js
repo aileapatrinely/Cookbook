@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
             recipe_id,
         ])
         .then((response) => res.send(response.rows))
-        .catch(() => console.log('Error in ingredients GET', error));
+        .catch((error) => console.log('Error in ingredients GET', error));
 });
 
 /**
