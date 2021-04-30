@@ -12,8 +12,8 @@ class HomePage extends Component {
 //     this.props.history.push(`/myrecipes`);
 //   };
 
-//   editDog = (event) => {
-//     this.props.history.push(`/edit`);
+//   addRecipe = (event) => {
+//     this.props.history.push(`/add`);
 //   };
 
 //   render() {
